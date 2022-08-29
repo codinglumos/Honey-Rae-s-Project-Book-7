@@ -1,0 +1,21 @@
+Each component will fetch the data needed to diplay in
+ the DOM and then manipulate that state depending on the 
+ users' interactions.
+
+ The library provides you with a function named useState() to store the state in a component. The function returns an ARRAY.  The ARRAY contains the inital state value index 0 and a function modifies the state index at 1. 
+
+ The index values are deconstructed into two variables. 
+const [ tickets, setTickets ] = useState([])
+
+After the above code is run- you will have two variables with the following values:
+1. tickets has a value of an empty array.
+2. setTickets has a value of a function.
+This is the initial change of state in a component.
+
+There is another function called useEffect() to OBSERVE state. useState() performs the FIRST change in state. 
+useEffect(
+    () => {
+        console.log(tickets) // View the initial state of tickets
+    },
+    [] // When this array is empty, you are observing initial component state
+)
