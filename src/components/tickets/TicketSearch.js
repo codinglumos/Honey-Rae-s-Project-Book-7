@@ -1,4 +1,3 @@
-//import { setterFunction } from "./TicketContainer"
 
 export const TicketSearch = ({ setterFunction }) => {
     return (

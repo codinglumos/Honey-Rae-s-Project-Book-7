@@ -14,7 +14,9 @@ export const TicketList = ({ searchTermState }) => {
 
 useEffect(
     () => {
-        const searchedTickets = tickets.filter(ticket => ticket.description.startswWith(searchTermState))
+        const searchedTickets = tickets.filter(ticket => {
+             return ticket.description.toLowerCase().startsWith(searchTermState.toLowerCase())
+        })
         setFiltered(searchedTickets)
     },
     [ searchTermState ]
