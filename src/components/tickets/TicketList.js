@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import "./tickets.css"
 
 export const TicketList = ({ searchTermState }) => {
@@ -98,7 +98,9 @@ useEffect(
               filteredTickets.map(
                 (ticket) => {
                     return <section className="ticket">
-                        <header>{ticket.description}</header>
+                        <header><Link to={`/tickets/${ticket.id}/edit`}>Ticket {ticket.id}</Link>
+                        </header>
+                        <div>{ticket.description}</div>
                         <footer>Emergency: {ticket.emergency ? "🔔" : "🔕"}</footer>
                     </section>
                 }
