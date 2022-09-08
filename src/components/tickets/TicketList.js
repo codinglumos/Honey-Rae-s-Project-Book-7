@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import { Ticket } from "./Ticket"
 import "./tickets.css"
 
 export const TicketList = ({ searchTermState }) => {
@@ -37,7 +38,7 @@ useEffect(
 
     useEffect(
         () => {
-            fetch('http://localhost:8088/serviceTickets')
+            fetch('http://localhost:8088/serviceTickets?_embed=employeeTickets')
                 .then(response => response.json())
                 .then((ticketArray) => {
                     setTickets(ticketArray)
@@ -96,14 +97,7 @@ useEffect(
     <article className="tickets">
             {
               filteredTickets.map(
-                (ticket) => {
-                    return <section className="ticket">
-                        <header><Link to={`/tickets/${ticket.id}/edit`}>Ticket {ticket.id}</Link>
-                        </header>
-                        <div>{ticket.description}</div>
-                        <footer>Emergency: {ticket.emergency ? "🔔" : "🔕"}</footer>
-                    </section>
-                }
+                (ticket) => <Ticket isStaff= {honeyUserObject.staff} ticketObject={ticket} />
               )  
             }
             </article>
