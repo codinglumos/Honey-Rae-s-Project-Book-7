@@ -9,6 +9,8 @@ export const TicketList = ({ searchTermState }) => {
     const [emergency, setEmergency] = useState(false)
     const [openOnly, updateOpenOnly] = useState(false)
     const navigate = useNavigate()
+    const [employees, setEmployees] = useState([])
+
 
     const localHoneyuser = localStorage.getItem("honey_user")
     const honeyUserObject = JSON.parse(localHoneyuser)
@@ -36,12 +38,22 @@ useEffect(
         [emergency]
     )
 
-    useEffect(
-        () => {
-            fetch('http://localhost:8088/serviceTickets?_embed=employeeTickets')
+const getAllTickets = () => {
+    fetch('http://localhost:8088/serviceTickets?_embed=employeeTickets')
                 .then(response => response.json())
                 .then((ticketArray) => {
                     setTickets(ticketArray)
+                })
+}
+
+    useEffect(
+        () => {
+            getAllTickets()
+            
+                fetch('http://localhost:8088/employees?_expand=user')
+                .then(response => response.json())
+                .then((employeeArray) => {
+                    setEmployees(employeeArray)
                 })
         },
         [] // When this array is empty, you are observing initial component state
@@ -97,7 +109,10 @@ useEffect(
     <article className="tickets">
             {
               filteredTickets.map(
-                (ticket) => <Ticket isStaff= {honeyUserObject.staff} ticketObject={ticket} />
+                (ticket) => <Ticket employees={employees}
+                getAllTickets={getAllTickets} 
+                currentUser= {honeyUserObject} 
+                ticketObject={ticket} />
               )  
             }
             </article>

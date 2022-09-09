@@ -15,3 +15,12 @@
     background-color: black;
     color: azure;
 }
+
+.ticket_finish {
+    margin-left: auto;
+}
+
+.ticket_delete {
+    margin-left: auto;
+    background-color: aquamarine;
+}
